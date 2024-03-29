@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          rel="stylesheet"
+        />
+    
+    <div class="container">
+          <h1 class="mt-5 mb-4">Todo List</h1>
+          <img src="{% static/media 'form.png' %}" />
+          <h2><a href="{% url 'todo_create' %}">Add Todo</a></h2>
+          <ul class="list-group">
+            {% for todo in todos %}
+            <li class="list-group-item">
+              {% if todo.completed %}
+              <s>{{todo.title}}</s>
+              {% else %} {{todo.title}} {% endif %}
+              <span>
+                <button class="completed-btn" data-id="{{ todo.id }}">
+                  {% if todo.completed %} UnCompleted {% else %} Completed {% endif %}
+                </button>
+                <a href="{% url 'todo_update' primary_key=todo.id %}">Edit</a>
+                <a href="{% url 'todo_delete' primary_key=todo.id %}"
+                  >Delete</a
+                ></span
+              >
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+</body>
+
+</html>
